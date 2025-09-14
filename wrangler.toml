@@ -1,0 +1,8 @@
+name = "osw-under-development"
+compatibility_date = "2025-09-13"
+workers_dev = true
+routes = [{ pattern = "opensourceweekend.org", custom_domain = true }]
+
+[assets]
+directory = "."
+not_found_handling = "404-page"
