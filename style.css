@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600;700&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0b0c10;
+    color: #e0e7ef;
+    overflow: hidden;
+    height: 100vh;
+}
+.futuristic-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 60% 40%, rgba(0,255,255,0.12) 0%, rgba(0,0,0,0.0) 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(255,0,255,0.10) 0%, rgba(0,0,0,0.0) 70%),
+    linear-gradient(120deg, #0b0c10 0%, #1a1a2e 100%);
+    animation: bgMove 16s linear infinite alternate;
+}
+@keyframes bgMove {
+    0% { background-position: 60% 40%, 30% 70%, 0% 0%; }
+    100% { background-position: 65% 45%, 35% 75%, 100% 100%; }
+}
+.gradient-overlay {
+    display: none;
+}
+.container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+.message-box {
+    max-width: 900px;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    background: rgba(20, 24, 38, 0.55);
+    box-shadow: 0 0 60px 10px #00fff7a0, 0 0 120px 10px #a259f7a0;
+    border: 2px solid rgba(0,255,255,0.25);
+    backdrop-filter: blur(24px) saturate(1.5);
+    animation: fadeInBox 1.5s cubic-bezier(.77,0,.18,1) 0.2s both;
+}
+.logo {
+    margin-bottom: 1rem;
+    animation: floatLogo 4s ease-in-out infinite;
+}
+.logo img {
+    height: 14rem;
+    width: auto;
+    display: inline-block;
+    filter: drop-shadow(0 0 32px #00fff7) drop-shadow(0 0 64px #a259f7);
+    animation: logoAppear 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
+}
+.title {
+    font-family: 'Orbitron', 'Poppins', sans-serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00fff7 10%, #a259f7 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: 0 0 24px #00fff7, 0 0 48px #a259f7;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: titleAppear 1.2s cubic-bezier(.77,0,.18,1) 0.5s forwards;
+}
+.subtitle {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    font-family: 'Orbitron', 'Poppins', sans-serif;
+    background: linear-gradient(90deg, #a259f7 10%, #00fff7 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: 0 0 16px #a259f7, 0 0 32px #00fff7;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: subtitleAppear 1.2s cubic-bezier(.77,0,.18,1) 0.8s forwards;
+}
+.description {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    line-height: 1.6;
+    color: #e0e7ef;
+    text-shadow: 0 0 8px #00fff7;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: descAppear 1.2s cubic-bezier(.77,0,.18,1) 1.1s forwards;
+}
+.status-message {
+    font-size: 2.1rem;
+    margin-top: 2rem;
+    font-family: 'Orbitron', 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    background: linear-gradient(90deg, #00fff7 10%, #a259f7 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: 0 0 24px #00fff7, 0 0 48px #a259f7;
+    animation: glitch 1.5s infinite, statusAppear 1.2s cubic-bezier(.77,0,.18,1) 1.4s forwards;
+    opacity: 0;
+}
+.cta-btn {
+    margin-top: 2.5rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    font-family: 'Orbitron', 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #0b0c10;
+    background: linear-gradient(90deg, #00fff7 0%, #a259f7 100%);
+    border: 2.5px solid #00fff7;
+    border-radius: 2rem;
+    box-shadow: 0 0 32px #00fff7, 0 0 64px #a259f7;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border 0.2s;
+    animation: ctaAppear 1.2s cubic-bezier(.77,0,.18,1) 1.7s forwards;
+    opacity: 0;
+}
+.cta-btn:hover {
+    transform: scale(1.12) rotate(-2deg);
+    background: linear-gradient(90deg, #a259f7 0%, #00fff7 100%);
+    border: 2.5px solid #a259f7;
+    box-shadow: 0 0 48px #a259f7, 0 0 96px #00fff7;
+}
+.social-icons a {
+    transition: transform 0.3s cubic-bezier(.77,0,.18,1), filter 0.3s, box-shadow 0.3s;
+    will-change: transform, filter;
+    display: inline-block;
+}
+.social-icons a:hover {
+    transform: scale(1.25) rotate(-8deg);
+    filter: drop-shadow(0 0 24px #00fff7) drop-shadow(0 0 48px #a259f7);
+}
+/* Animations */
+@keyframes glitch {
+    0% { text-shadow: 2px 2px #00fff7, -2px -2px #a259f7; }
+    25% { text-shadow: -2px 2px #00fff7, 2px -2px #a259f7; }
+    50% { text-shadow: 2px -2px #00fff7, -2px 2px #a259f7; }
+    75% { text-shadow: -2px -2px #00fff7, 2px 2px #a259f7; }
+    100% { text-shadow: 2px 2px #00fff7, -2px -2px #a259f7; }
+}
+@keyframes fadeInBox {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes logoAppear {
+    from { opacity: 0; transform: scale(0.7) translateY(-40px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+}
+@keyframes titleAppear {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes subtitleAppear {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes descAppear {
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes statusAppear {
+    to { opacity: 1; }
+}
+@keyframes ctaAppear {
+    to { opacity: 1; }
+}
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
