@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Weekend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        .message-box {
+            max-width: 900px;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            background-color: rgba(19, 23, 30, 0.7);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 0 60px rgba(100, 255, 100, 0.2);
+            border: 1px solid rgba(100, 255, 100, 0.3);
+            animation: fadeIn 2s ease-in-out;
+        }
+        .logo {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #66fcf1;
+            text-shadow: 0 0 10px #66fcf1, 0 0 20px #66fcf1;
+            margin-bottom: 1rem;
+            animation: pulse 3s infinite;
+        }
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #45a29e;
+            text-shadow: 0 0 5px #45a29e;
+        }
+        .subtitle {
+            font-size: 1.75rem;
+            margin-top: 0.5rem;
+            color: #c5c6c7;
+        }
+        .description {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            line-height: 1.6;
+            color: #999999;
+        }
+        .status-message {
+            font-size: 2rem;
+            margin-top: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: #45a29e;
+            text-shadow: 0 0 5px #45a29e;
+            animation: glitch 1.5s infinite;
+        }
+        .social-icons a {
+            transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 8px #66fcf1);
+        }
+
+        /* Glitch Animation */
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #66fcf1, -2px -2px #45a29e; }
+            25% { text-shadow: -2px 2px #66fcf1, 2px -2px #45a29e; }
+            50% { text-shadow: 2px -2px #66fcf1, -2px 2px #45a29e; }
+            75% { text-shadow: -2px -2px #66fcf1, 2px 2px #45a29e; }
+            100% { text-shadow: 2px 2px #66fcf1, -2px -2px #45a29e; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 10px #66fcf1, 0 0 20px #66fcf1; }
+            50% { text-shadow: 0 0 5px #66fcf1, 0 0 10px #66fcf1; }
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="container">
+        <div class="message-box">
+            <div class="logo">OSW</div>
+            <h1 class="title">Open Source Weekend</h1>
+            <p class="subtitle">The Future of Collaboration is Loading...</p>
+            <p class="description">
+                Prepare to connect with developers, collaborate on innovative projects, and contribute to the open-source community. This is a space to learn, build, and shape the future of technology together. We're getting everything ready for an event that will ignite your passion for code.
+            </p>
+            <p class="status-message">Great Things are on the Way...</p>
+            
+            <!-- Social Media Icons -->
+            <div class="social-icons flex justify-center space-x-6 mt-8">
+                <a href="#" target="_blank" aria-label="GitHub">
+                    <svg class="h-10 w-10 text-white hover:text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.865-.013-1.7c-2.782.607-3.37-1.34-3.37-1.34-.454-1.156-1.11-1.46-1.11-1.46-.908-.62.069-.608.069-.608 1.002.07 1.529 1.03 1.529 1.03.892 1.531 2.341 1.088 2.91.83.091-.64.351-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.949 0-1.092.39-1.983 1.03-2.682-.103-.253-.448-1.272.097-2.646 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.114 2.504.331 1.909-1.294 2.747-1.026 2.747-1.026.546 1.373.202 2.394.098 2.646.64.7 1.028 1.59 1.028 2.682 0 3.843-2.339 4.695-4.562 4.942.359.31.678.924.678 1.865 0 1.34-.012 2.411-.012 2.731 0 .268.18.578.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#" target="_blank" aria-label="LinkedIn">
+                    <svg class="h-10 w-10 text-white hover:text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" target="_blank" aria-label="X">
+                    <svg class="h-10 w-10 text-white hover:text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18.901 1.153C19.789.743 21 1.344 21 2.45v21.55c0 .69-.877.94-1.229.418L13 14.283c-.347-.365-.899-.365-1.247 0L4.229 24.418C3.877 24.94 3 24.69 3 24v-21.55C3 1.344 4.211.743 5.099 1.153l7.95 3.52c.315.14.653.14.968 0l7.95-3.52z"/>
+                    </svg>
+                </a>
+                <a href="#" target="_blank" aria-label="Facebook">
+                    <svg class="h-10 w-10 text-white hover:text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22.675 0c.732 0 1.325.603 1.325 1.342v21.316c0 .739-.593 1.342-1.325 1.342h-6.264v-9.29h3.116l.465-3.613h-3.581V10.1c0-1.047.29-1.76 1.791-1.76h1.916V5.416s-1.737-.298-3.4-.298c-3.468 0-5.783 2.106-5.783 5.952v3.315h-3.58v3.613h3.58v9.29H1.325C.593 24 0 23.397 0 22.658V1.342C0 .603.593 0 1.325 0h21.35z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const particleCount = 100;
+            const maxDistance = 150;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 1.5;
+                    this.vy = (Math.random() - 0.5) * 1.5;
+                    this.size = Math.random() * 2 + 1;
+                    this.color = `#ffffff`;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function connectParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i; j < particles.length; j++) {
+                        const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                        
+                        if (dist < maxDistance) {
+                            ctx.strokeStyle = `rgba(69, 162, 158, ${1 - dist / maxDistance})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#0b0c10';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                for (const particle of particles) {
+                    particle.update();
+                    particle.draw();
+                }
+
+                connectParticles();
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            initParticles();
+            animate();
+        });
+    </script>
+</body>
+</html>
+
