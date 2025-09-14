@@ -5,14 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Source Weekend</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600;700&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #0b0c10;
-            color: #c5c6c7;
+            background: #0b0c10;
+            color: #e0e7ef;
             overflow: hidden;
             height: 100vh;
+        }
+        .futuristic-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse at 60% 40%, rgba(0,255,255,0.12) 0%, rgba(0,0,0,0.0) 60%),
+                        radial-gradient(ellipse at 30% 70%, rgba(255,0,255,0.10) 0%, rgba(0,0,0,0.0) 70%),
+                        linear-gradient(120deg, #0b0c10 0%, #1a1a2e 100%);
+            animation: bgMove 16s linear infinite alternate;
+        }
+        @keyframes bgMove {
+            0% { background-position: 60% 40%, 30% 70%, 0% 0%; }
+            100% { background-position: 65% 45%, 35% 75%, 100% 100%; }
+        }
+        .gradient-overlay {
+            display: none;
         }
         .container {
             position: relative;
@@ -27,98 +45,171 @@
         .message-box {
             max-width: 900px;
             padding: 2.5rem;
-            border-radius: 1.5rem;
-            background-color: rgba(19, 23, 30, 0.7);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.2), 0 0 60px rgba(100, 255, 100, 0.2);
-            border: 1px solid rgba(100, 255, 100, 0.3);
-            animation: fadeIn 2s ease-in-out;
+            border-radius: 2rem;
+            background: rgba(20, 24, 38, 0.55);
+            box-shadow: 0 0 60px 10px #00fff7a0, 0 0 120px 10px #a259f7a0;
+            border: 2px solid rgba(0,255,255,0.25);
+            backdrop-filter: blur(24px) saturate(1.5);
+            animation: fadeInBox 1.5s cubic-bezier(.77,0,.18,1) 0.2s both;
         }
         .logo {
-            font-size: 5rem;
-            font-weight: 700;
-            color: #66fcf1;
-            text-shadow: 0 0 10px #66fcf1, 0 0 20px #66fcf1;
             margin-bottom: 1rem;
-            animation: pulse 3s infinite;
+            animation: floatLogo 4s ease-in-out infinite;
+        }
+        .logo img {
+            height: 14rem;
+            width: auto;
+            display: inline-block;
+            filter: drop-shadow(0 0 32px #00fff7) drop-shadow(0 0 64px #a259f7);
+            animation: logoAppear 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
         }
         .title {
-            font-size: 3.5rem;
+            font-family: 'Orbitron', 'Poppins', sans-serif;
+            font-size: 3.8rem;
             font-weight: 700;
-            color: #45a29e;
-            text-shadow: 0 0 5px #45a29e;
+            background: linear-gradient(90deg, #00fff7 10%, #a259f7 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 0 24px #00fff7, 0 0 48px #a259f7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: titleAppear 1.2s cubic-bezier(.77,0,.18,1) 0.5s forwards;
         }
         .subtitle {
-            font-size: 1.75rem;
+            font-size: 2rem;
             margin-top: 0.5rem;
-            color: #c5c6c7;
+            font-family: 'Orbitron', 'Poppins', sans-serif;
+            background: linear-gradient(90deg, #a259f7 10%, #00fff7 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 0 16px #a259f7, 0 0 32px #00fff7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: subtitleAppear 1.2s cubic-bezier(.77,0,.18,1) 0.8s forwards;
         }
         .description {
             font-size: 1.25rem;
             margin-top: 1.5rem;
             line-height: 1.6;
-            color: #999999;
+            color: #e0e7ef;
+            text-shadow: 0 0 8px #00fff7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: descAppear 1.2s cubic-bezier(.77,0,.18,1) 1.1s forwards;
         }
         .status-message {
-            font-size: 2rem;
+            font-size: 2.1rem;
             margin-top: 2rem;
-            font-weight: 600;
+            font-family: 'Orbitron', 'Poppins', sans-serif;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.2rem;
-            color: #45a29e;
-            text-shadow: 0 0 5px #45a29e;
-            animation: glitch 1.5s infinite;
+            background: linear-gradient(90deg, #00fff7 10%, #a259f7 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0 0 24px #00fff7, 0 0 48px #a259f7;
+            animation: glitch 1.5s infinite, statusAppear 1.2s cubic-bezier(.77,0,.18,1) 1.4s forwards;
+            opacity: 0;
+        }
+        .cta-btn {
+            margin-top: 2.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #0b0c10;
+            background: linear-gradient(90deg, #00fff7 0%, #a259f7 100%);
+            border: 2.5px solid #00fff7;
+            border-radius: 2rem;
+            box-shadow: 0 0 32px #00fff7, 0 0 64px #a259f7;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border 0.2s;
+            animation: ctaAppear 1.2s cubic-bezier(.77,0,.18,1) 1.7s forwards;
+            opacity: 0;
+        }
+        .cta-btn:hover {
+            transform: scale(1.12) rotate(-2deg);
+            background: linear-gradient(90deg, #a259f7 0%, #00fff7 100%);
+            border: 2.5px solid #a259f7;
+            box-shadow: 0 0 48px #a259f7, 0 0 96px #00fff7;
         }
         .social-icons a {
-            transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out;
+            transition: transform 0.3s cubic-bezier(.77,0,.18,1), filter 0.3s, box-shadow 0.3s;
+            will-change: transform, filter;
+            display: inline-block;
         }
         .social-icons a:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 8px #66fcf1);
+            transform: scale(1.25) rotate(-8deg);
+            filter: drop-shadow(0 0 24px #00fff7) drop-shadow(0 0 48px #a259f7);
         }
-
-        /* Glitch Animation */
+        /* Animations */
         @keyframes glitch {
-            0% { text-shadow: 2px 2px #66fcf1, -2px -2px #45a29e; }
-            25% { text-shadow: -2px 2px #66fcf1, 2px -2px #45a29e; }
-            50% { text-shadow: 2px -2px #66fcf1, -2px 2px #45a29e; }
-            75% { text-shadow: -2px -2px #66fcf1, 2px 2px #45a29e; }
-            100% { text-shadow: 2px 2px #66fcf1, -2px -2px #45a29e; }
+            0% { text-shadow: 2px 2px #00fff7, -2px -2px #a259f7; }
+            25% { text-shadow: -2px 2px #00fff7, 2px -2px #a259f7; }
+            50% { text-shadow: 2px -2px #00fff7, -2px 2px #a259f7; }
+            75% { text-shadow: -2px -2px #00fff7, 2px 2px #a259f7; }
+            100% { text-shadow: 2px 2px #00fff7, -2px -2px #a259f7; }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInBox {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes logoAppear {
+            from { opacity: 0; transform: scale(0.7) translateY(-40px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-18px); }
+        }
+        @keyframes titleAppear {
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes pulse {
-            0%, 100% { text-shadow: 0 0 10px #66fcf1, 0 0 20px #66fcf1; }
-            50% { text-shadow: 0 0 5px #66fcf1, 0 0 10px #66fcf1; }
+        @keyframes subtitleAppear {
+            to { opacity: 1; transform: translateY(0); }
         }
-
+        @keyframes descAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes statusAppear {
+            to { opacity: 1; }
+        }
+        @keyframes ctaAppear {
+            to { opacity: 1; }
+        }
         #particle-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
+    <div class="futuristic-bg"></div>
 
     <div class="container">
         <div class="message-box">
-            <div class="logo">OSW</div>
+            <div class="logo">
+                <img src="assets/OSWWhite.svg" alt="OSW Logo" />
+            </div>
             <h1 class="title">Open Source Weekend</h1>
             <p class="subtitle">The Future of Collaboration is Loading...</p>
             <p class="description">
                 Prepare to connect with developers, collaborate on innovative projects, and contribute to the open-source community. This is a space to learn, build, and shape the future of technology together. We're getting everything ready for an event that will ignite your passion for code.
             </p>
             <p class="status-message">Great Things are on the Way...</p>
-            
+            <button class="cta-btn">Get Notified</button>
+
             <!-- Social Media Icons -->
             <div class="social-icons flex justify-center space-x-6 mt-8">
                 <a href="#" target="_blank" aria-label="GitHub">
@@ -152,6 +243,8 @@
             let particles = [];
             const particleCount = 100;
             const maxDistance = 150;
+            const colors = ['#00fff7', '#a259f7', '#ffffff'];
+            let mouse = { x: null, y: null };
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -162,25 +255,44 @@
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 1.5;
-                    this.vy = (Math.random() - 0.5) * 1.5;
-                    this.size = Math.random() * 2 + 1;
-                    this.color = `#ffffff`;
+                    this.vx = (Math.random() - 0.5) * 1.2;
+                    this.vy = (Math.random() - 0.5) * 1.2;
+                    this.size = Math.random() * 2.5 + 1.5;
+                    this.baseColor = colors[Math.floor(Math.random() * colors.length)];
+                    this.color = this.baseColor;
                 }
 
                 update() {
                     this.x += this.vx;
                     this.y += this.vy;
 
+                    // Bounce off edges
                     if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
                     if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                    // Mouse interaction: attract/repel
+                    if (mouse.x && mouse.y) {
+                        const dx = this.x - mouse.x;
+                        const dy = this.y - mouse.y;
+                        const dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < 120) {
+                            this.x += dx / dist * 0.7;
+                            this.y += dy / dist * 0.7;
+                        }
+                    }
                 }
 
                 draw() {
-                    ctx.fillStyle = this.color;
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0.1, this.x, this.y, this.size*2);
+                    gradient.addColorStop(0, this.baseColor);
+                    gradient.addColorStop(0.7, this.baseColor + 'cc');
+                    gradient.addColorStop(1, 'rgba(11,12,16,0.0)');
+                    ctx.globalAlpha = 0.7;
+                    ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
+                    ctx.globalAlpha = 1;
                 }
             }
 
@@ -193,16 +305,24 @@
 
             function connectParticles() {
                 for (let i = 0; i < particles.length; i++) {
-                    for (let j = i; j < particles.length; j++) {
+                    for (let j = i + 1; j < particles.length; j++) {
                         const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
-                        
                         if (dist < maxDistance) {
-                            ctx.strokeStyle = `rgba(69, 162, 158, ${1 - dist / maxDistance})`;
-                            ctx.lineWidth = 1;
+                            // Neon gradient line color
+                            const grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                            grad.addColorStop(0, particles[i].baseColor);
+                            grad.addColorStop(1, particles[j].baseColor);
+                            ctx.strokeStyle = grad;
+                            ctx.globalAlpha = 0.12 + 0.25 * (1 - dist / maxDistance);
+                            ctx.shadowColor = grad;
+                            ctx.shadowBlur = 8;
+                            ctx.lineWidth = 1.5;
                             ctx.beginPath();
                             ctx.moveTo(particles[i].x, particles[i].y);
                             ctx.lineTo(particles[j].x, particles[j].y);
                             ctx.stroke();
+                            ctx.shadowBlur = 0;
+                            ctx.globalAlpha = 1;
                         }
                     }
                 }
@@ -223,6 +343,15 @@
             }
 
             window.addEventListener('resize', resizeCanvas);
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
             resizeCanvas();
             initParticles();
             animate();
@@ -230,4 +359,3 @@
     </script>
 </body>
 </html>
-
